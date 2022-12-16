@@ -15,10 +15,14 @@ function usage() {
   echo
   echo "Creates a tmux session based on a predefined layout."
   echo
-  echo "3 windows are created.."
+  echo "7 windows are created.."
+  echo "- docs"
   echo "- dev"
+  echo "- lint"
+  echo "- git"
   echo "- cmd"
-  echo "- ssh"
+  echo "- docker"
+  echo "- remote"
   echo 
   echo "Usage: $(basename "$0") <session_name>"
   echo
@@ -56,9 +60,13 @@ function create() {
 
   tmux new-session -d -s "$session"
 
-  tmux rename-window dev
+  tmux rename-window docs
+  tmux new-window -d -n dev
+  tmux new-window -d -n lint
+  tmux new-window -d -n git
   tmux new-window -d -n cmd
-  tmux new-window -d -n ssh
+  tmux new-window -d -n docker
+  tmux new-window -d -n remote
 
   tmux attach-session -d -t "$session"
 }
